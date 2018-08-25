@@ -4,6 +4,8 @@
   "description": "Makes it easy to assert if two virtual DOM trees look similar",
   "main": "lib/index.js",
   "scripts": {
+    "build": "tsc -d",
+    "prepublishOnly": "npm run test",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register test/**/*"
   },
   "repository": {

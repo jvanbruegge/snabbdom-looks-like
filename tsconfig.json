@@ -9,9 +9,9 @@
     "jsxFactory": "Snabbdom.createElement",
     "noImplicitReturns": true,
     "strict": true,
+    "outDir": "lib",
     "strictFunctionTypes": false,
-    "allowJs": true,
     "lib": ["ES6", "ES5", "DOM"]
   },
-  "exclude": ["node_modules", "build"]
+  "include": ["src/index.ts"]
 }
