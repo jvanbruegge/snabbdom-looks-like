@@ -2,7 +2,7 @@ import { VNode } from 'snabbdom/vnode';
 
 const wildcardSymbol: any = Symbol();
 
-export function wildcard() {
+export function Wildcard() {
     return wildcardSymbol;
 }
 
@@ -14,8 +14,9 @@ const e5 = (a: any, e: any) => `Node selectors are not matching, actual: "${a.se
 const e6 = (a: any, e: any) => `Not enough children, actual: ${a.children.length}, expected at least: ${e.children.length}`;
 const e7 = 'Two consequtive wildcards are not allowed';
 const e8 = 'Could not match children';
+const e9 = (a: number, b: number) => `Children mismatched, actual: ${a}, expected: ${b}`;
 
-export function looksLike(actual: VNode | string, expected: VNode | string | Symbol): void {
+export function assertLooksLike(actual: VNode | string, expected: VNode | string | Symbol): void {
     if(typeof actual === 'symbol') {
         throw new Error(e1);
     }
@@ -56,9 +57,13 @@ export function looksLike(actual: VNode | string, expected: VNode | string | Sym
             for(let i = 0; i < tries.length; i++) {
                 success = true;
 
+                if(tries[i].length !== actual.children.length) {
+                    throw new Error(e9(tries[i].length, actual.children.length));
+                }
+
                 for(let j = 0; j < tries[i].length; j++) {
                     try {
-                        looksLike(actual.children[j], tries[i][j]);
+                        assertLooksLike(actual.children[j], tries[i][j]);
                     } catch (e) {
                         success = false;
                         break;
@@ -121,9 +126,9 @@ function isObj(a: any): a is VNode {
     return typeof a === 'object';
 }
 
-export function looksLikeBool(actual: VNode | string, expected: VNode | string): boolean {
+export function looksLike(actual: VNode | string, expected: VNode | string): boolean {
     try {
-        looksLike(actual, expected);
+        assertLooksLike(actual, expected);
         return true;
     } catch (e) {
         return false;

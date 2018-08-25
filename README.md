@@ -4,10 +4,11 @@ Makes it easy to assert if to virtual DOM trees look similar
 
 ## Usage
 
-```js
-import { looksLike, wildcard } from 'snabbdom-looks-like';
+```jsx
+import { assertLooksLike, Wildcard } from 'snabbdom-looks-like';
 import { h } from 'snabbdom/h';
 import { div, span } from '@cycle/dom'; // or other hyperscript helpers
+import Snabbdom from 'snabbdom-pragma'; // for JSX
 
 import * as assert from 'assert';
 
@@ -20,14 +21,14 @@ it('simple Test', () => {
         h('span', {}. 'hello')
     ]);
 
-    looksLike(actual, expected);
+    assertLooksLike(actual, expected);
 });
 
 it('supports wildcards', () => {
     const expected = div([
-        wildcard(),
+        Wildcard(),
         span('', {}, 'hello'),
-        wildcard(),
+        Wildcard(),
         div('.red')
     ]);
 
@@ -45,7 +46,30 @@ it('supports wildcards', () => {
         h('div.blue')
     ]);
 
-    looksLike(actual, matches);
-    assert.throws(() => looksLike(actual, doesNotMatch));
+    assertLooksLike(matches, expected);
+    assert.throws(() => assertLooksLike(doesNotMatch, expected));
+});
+
+it('also works with JSX', () => {
+    const expected = <div>
+        <Wildcard />,
+        <span>hello</span>,
+        <Wildcard />,
+    </div>;
+
+    const actualHyperscript = h('div', {}, [
+        h('span', {}, 'hello'),
+        h('span', {}, 'this gets matched to the wildcard!!!!'),
+        h('span', {}, 'this too!!!!')
+    ]);
+
+    const actualJSX = <div>
+        <span>hello</span>
+        <span>this gets matched to the wildcard!!!!</span>
+        <span>this too!!!!</span>
+    </div>;
+
+    assertLooksLike(actualHyperscript, expected);
+    assertLooksLike(actualJSX, expected);
 });
 ```
