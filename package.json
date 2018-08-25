@@ -1,0 +1,31 @@
+{
+  "name": "snabbdom-looks-like",
+  "version": "0.0.1",
+  "description": "Makes it easy to assert if two virtual DOM trees look similar",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register test/**/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvanbruegge/snabbdom-looks-like.git"
+  },
+  "author": "Jan van Brügge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jvanbruegge/snabbdom-looks-like/issues"
+  },
+  "homepage": "https://github.com/jvanbruegge/snabbdom-looks-like#readme",
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.2",
+    "mocha": "^5.2.0",
+    "snabbdom": "^0.7.1",
+    "snabbdom-pragma": "^2.7.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
+  },
+  "peerDependencies": {
+    "snabbdom": ">=0.7.0"
+  }
+}
