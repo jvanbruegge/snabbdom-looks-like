@@ -72,4 +72,16 @@ it('also works with JSX', () => {
     assertLooksLike(actualHyperscript, expected);
     assertLooksLike(actualJSX, expected);
 });
+
+it('can expect attributes', () => {
+    const expected = <div>
+        <span className="test">Test</span>
+    </div>;
+
+    const actual = h('div', {}, [
+        h('span', { props: { className: 'test' }}, 'Test')
+    ]);
+
+    assertLooksLike(actual, expected);
+});
 ```
