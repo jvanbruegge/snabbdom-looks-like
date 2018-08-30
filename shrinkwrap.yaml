@@ -1,12 +1,20 @@
+dependencies:
+  diff: 3.5.0
 devDependencies:
+  '@types/diff': 3.5.1
   '@types/mocha': 5.2.5
   '@types/node': 10.9.2
   mocha: 5.2.0
+  prettier: 1.14.2
   snabbdom: 0.7.1
   snabbdom-pragma: 2.7.0
   ts-node: 7.0.1
   typescript: 3.0.1
 packages:
+  /@types/diff/3.5.1:
+    dev: true
+    resolution:
+      integrity: sha512-nkT7bd/YM6QRDQjww8PYf0kOj1MvwxQ/WaCinj2Hm1HlL+JqGTm4cDoQeROfiWX/B3SNI1nyLLhLAQpp5sE3hw==
   /@types/mocha/5.2.5:
     dev: true
     resolution:
@@ -55,7 +63,6 @@ packages:
     resolution:
       integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
   /diff/3.5.0:
-    dev: true
     engines:
       node: '>=0.3.1'
     resolution:
@@ -173,6 +180,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
+  /prettier/1.14.2:
+    dev: true
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-McHPg0n1pIke+A/4VcaS2en+pTNjy4xF+Uuq86u/5dyDO59/TtFZtQ708QIRkEZ3qwKz3GVkVa6mpxK/CpB8Rg==
   /snabbdom-pragma/2.7.0:
     dependencies:
       extend: 3.0.2
@@ -241,9 +255,12 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  '@types/diff': ^3.5.1
   '@types/mocha': ^5.2.5
   '@types/node': ^10.9.2
+  diff: ^3.5.0
   mocha: ^5.2.0
+  prettier: ^1.14.2
   snabbdom: ^0.7.1
   snabbdom-pragma: ^2.7.0
   ts-node: ^7.0.1

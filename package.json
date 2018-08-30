@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -d",
-    "prepublishOnly": "npm run test",
+    "prepublishOnly": "npm run build && npm run test",
+    "format": "prettier --write '{src,test}/**/*'",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register test/**/*"
   },
   "repository": {
@@ -17,11 +18,17 @@
   "bugs": {
     "url": "https://github.com/jvanbruegge/snabbdom-looks-like/issues"
   },
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true
+  },
   "homepage": "https://github.com/jvanbruegge/snabbdom-looks-like#readme",
   "devDependencies": {
+    "@types/diff": "^3.5.1",
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.9.2",
     "mocha": "^5.2.0",
+    "prettier": "^1.14.2",
     "snabbdom": "^0.7.1",
     "snabbdom-pragma": "^2.7.0",
     "ts-node": "^7.0.1",
@@ -29,5 +36,8 @@
   },
   "peerDependencies": {
     "snabbdom": ">=0.7.0"
+  },
+  "dependencies": {
+    "diff": "^3.5.0"
   }
 }
