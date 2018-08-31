@@ -1,6 +1,6 @@
 {
   "name": "snabbdom-looks-like",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Makes it easy to assert if two virtual DOM trees look similar",
   "main": "lib/index.js",
   "scripts": {
