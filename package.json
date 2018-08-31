@@ -34,9 +34,6 @@
     "ts-node": "^7.0.1",
     "typescript": "^3.0.1"
   },
-  "peerDependencies": {
-    "snabbdom": ">=0.7.0"
-  },
   "dependencies": {
     "diff": "^3.5.0"
   }
