@@ -44,10 +44,22 @@ export function assertLooksLike(
                     .split('\n')
                     .slice(5)
                     .filter(s => s.indexOf('No newline at end of file') === -1)
-                    .filter(s => !(s.startsWith('-') && s.indexOf('WILDCARD') !== -1))
-                    .map(s => !(s.startsWith('+') || s.startsWith('-')) ? '         ' + s : s)
-                    .map(s => s.startsWith('-') ? 'expected: ' + s.slice(1) : s)
-                    .map(s => s.startsWith('+') ? 'actual:   ' + s.slice(1) : s)
+                    .filter(
+                        s =>
+                            !(s.startsWith('-') && s.indexOf('WILDCARD') !== -1)
+                    )
+                    .map(
+                        s =>
+                            !(s.startsWith('+') || s.startsWith('-'))
+                                ? '         ' + s
+                                : s
+                    )
+                    .map(
+                        s => (s.startsWith('-') ? 'expected: ' + s.slice(1) : s)
+                    )
+                    .map(
+                        s => (s.startsWith('+') ? 'actual:   ' + s.slice(1) : s)
+                    )
                     .join('\n') +
                 (longError
                     ? '\n\n' +
@@ -89,7 +101,13 @@ export function assertLooksLike(
     if (isObj(actual) && isWildcard(expected)) {
         return;
     } else if (isObj(actual) && isObj(expected)) {
-        if (actual.sel === expected.sel) {
+        const actualSels = (actual.sel || '').split(/\.|#/);
+        const expectedSels = (expected.sel || '').split(/\.|#/);
+        const isSubset = expectedSels.reduce(
+            (acc, curr) => acc && actualSels.indexOf(curr) !== -1,
+            true
+        );
+        if (isSubset) {
             if (actual.text !== expected.text) {
                 throw new Error(e4(actual, expected));
             }
@@ -146,7 +164,11 @@ export function assertLooksLike(
 
                 for (let j = 0; j < tries[i].length; j++) {
                     try {
-                        assertLooksLike(actual.children[j], tries[i][j], longError);
+                        assertLooksLike(
+                            actual.children[j],
+                            tries[i][j],
+                            longError
+                        );
                     } catch (e) {
                         lastError = e.message;
                         success = false;
