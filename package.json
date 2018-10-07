@@ -8,7 +8,7 @@
     "build": "tsc -d",
     "prepublishOnly": "npm run build && npm run test",
     "format": "prettier --write '{src,test}/**/*'",
-    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register test/**/*"
+    "test": "mocha --require ts-node/register test/**/*"
   },
   "repository": {
     "type": "git",
