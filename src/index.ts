@@ -207,7 +207,7 @@ function removeGrandchildren(vnode: VNode) {
 }
 
 function objectMatches(actual: any, expected: any): boolean {
-    if (!expected) {
+    if (expected === undefined) {
         return true;
     }
     if (typeof expected !== typeof actual) {

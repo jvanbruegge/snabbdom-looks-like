@@ -157,3 +157,16 @@ describe('attributes', () => {
         assert.throws(() => assertLooksLike(wrong, expected));
     });
 });
+
+describe('regressions', () => {
+    it('issue #1', () => {
+        const actual = h('input', { props: { required: true } });
+
+        const bad1 = h('input', { props: { required: false } });
+        const bad2 = h('input', { props: { required: 'squid' } });
+
+        assertLooksLike(actual, h('input'));
+        assert.throws(() => assertLooksLike(actual, bad1));
+        assert.throws(() => assertLooksLike(actual, bad2));
+    });
+});
