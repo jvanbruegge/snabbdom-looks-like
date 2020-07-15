@@ -1,41 +1,60 @@
 {
-  "name": "snabbdom-looks-like",
-  "version": "1.0.5",
-  "description": "Makes it easy to assert if two virtual DOM trees look similar",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc -d",
-    "prepublishOnly": "npm run build && npm run test",
-    "format": "prettier --write '{src,test}/**/*'",
-    "test": "mocha --require ts-node/register test/**/*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jvanbruegge/snabbdom-looks-like.git"
-  },
-  "author": "Jan van Brügge",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jvanbruegge/snabbdom-looks-like/issues"
-  },
-  "prettier": {
-    "tabWidth": 4,
-    "singleQuote": true
-  },
-  "homepage": "https://github.com/jvanbruegge/snabbdom-looks-like#readme",
-  "devDependencies": {
-    "@types/diff": "^3.5.1",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.9.2",
-    "mocha": "^5.2.0",
-    "prettier": "^1.14.2",
-    "snabbdom": "^0.7.1",
-    "snabbdom-pragma": "^2.7.0",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.0.1"
-  },
-  "dependencies": {
-    "diff": "^3.5.0"
-  }
+    "name": "snabbdom-looks-like",
+    "version": "2.0.0",
+    "description": "Makes it easy to assert if two virtual DOM trees look similar",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "test": "lint-staged  &&  jest",
+        "debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+        "build": "tsc -d",
+        "prepublishOnly": "npm test  &&  npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jvanbruegge/snabbdom-looks-like.git"
+    },
+    "author": "Jan van Brügge",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jvanbruegge/snabbdom-looks-like/issues"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "trailingComma": "none",
+        "arrowParens": "avoid",
+        "singleQuote": true
+    },
+    "homepage": "https://github.com/jvanbruegge/snabbdom-looks-like#readme",
+    "devDependencies": {
+        "@types/diff": "^4.0.2",
+        "@types/jest": "^26.0.4",
+        "@types/node": "^14.0.23",
+        "husky": "^4.2.5",
+        "jest": "^26.1.0",
+        "lint-staged": "^10.2.11",
+        "prettier": "^2.0.5",
+        "ts-jest": "^26.1.2",
+        "typescript": "^3.9.6"
+    },
+    "dependencies": {
+        "diff": "^4.0.2",
+        "snabbdom": "^1.0.1"
+    },
+    "lint-staged": {
+        "*.{md,json,ts,tsx}": [
+            "prettier --write"
+        ]
+    },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node",
+        "transformIgnorePatterns": []
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm test",
+            "pre-push": "npm run build"
+        }
+    }
 }

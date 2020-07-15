@@ -1,8 +1,8 @@
 import * as assert from 'assert';
-import { h } from 'snabbdom/h';
-import { VNode } from 'snabbdom/vnode';
-import { assertLooksLike, looksLike, Wildcard } from '../src/index';
-import Snabbdom from 'snabbdom-pragma';
+import { h } from 'snabbdom/src/package/h';
+
+import { assertLooksLike, looksLike, Wildcard } from '../src';
+import { createElement } from './creator';
 
 describe('structure', () => {
     it('should compare string nodes', () => {

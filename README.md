@@ -2,6 +2,10 @@
 
 Makes it easy to assert if to virtual DOM trees look similar
 
+[![NPM Dependency](https://david-dm.org/jvanbruegge/snabbdom-looks-like.svg)][1]
+
+[![NPM](https://nodei.co/npm/snabbdom-looks-like.png?downloads=true&downloadRank=true&stars=true)][2]
+
 ## Usage
 
 ```jsx
@@ -85,3 +89,6 @@ it('can expect attributes', () => {
     assertLooksLike(actual, expected);
 });
 ```
+
+[1]: https://david-dm.org/jvanbruegge/snabbdom-looks-like
+[2]: https://nodei.co/npm/snabbdom-looks-like/

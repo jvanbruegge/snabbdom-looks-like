@@ -1,4 +1,4 @@
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom/build/package/vnode';
 import * as jsdiff from 'diff';
 
 export function Wildcard(): VNode {
@@ -48,17 +48,16 @@ export function assertLooksLike(
                         s =>
                             !(s.startsWith('-') && s.indexOf('WILDCARD') !== -1)
                     )
-                    .map(
-                        s =>
-                            !(s.startsWith('+') || s.startsWith('-'))
-                                ? '         ' + s
-                                : s
+                    .map(s =>
+                        !(s.startsWith('+') || s.startsWith('-'))
+                            ? '         ' + s
+                            : s
                     )
-                    .map(
-                        s => (s.startsWith('-') ? 'expected: ' + s.slice(1) : s)
+                    .map(s =>
+                        s.startsWith('-') ? 'expected: ' + s.slice(1) : s
                     )
-                    .map(
-                        s => (s.startsWith('+') ? 'actual:   ' + s.slice(1) : s)
+                    .map(s =>
+                        s.startsWith('+') ? 'actual:   ' + s.slice(1) : s
                     )
                     .join('\n') +
                 (longError
@@ -136,10 +135,10 @@ export function assertLooksLike(
                                 ? 2
                                 : 0
                             : a === 2
-                                ? 2
-                                : isWildcard(c)
-                                    ? 1
-                                    : 0,
+                            ? 2
+                            : isWildcard(c)
+                            ? 1
+                            : 0,
                     0
                 ) === 2
             ) {
@@ -192,14 +191,13 @@ function removeGrandchildren(vnode: VNode) {
         ...vnode,
         children: vnode.children
             ? vnode.children
-                  .map(
-                      c =>
-                          typeof c === 'object'
-                              ? {
-                                    ...c,
-                                    children: '...'
-                                }
-                              : c
+                  .map(c =>
+                      typeof c === 'object'
+                          ? {
+                                ...c,
+                                children: '...'
+                            }
+                          : c
                   )
                   .map(c => (isWildcard(c) ? 'WILDCARD' : c))
             : []
