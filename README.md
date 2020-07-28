@@ -10,7 +10,7 @@ Makes it easy to assert if to virtual DOM trees look similar
 
 ```jsx
 import { assertLooksLike, Wildcard } from 'snabbdom-looks-like';
-import { h } from 'snabbdom/h';
+import { h } from 'snabbdom/build/package/h';
 import { div, span } from '@cycle/dom'; // or other hyperscript helpers
 import Snabbdom from 'snabbdom-pragma'; // for JSX
 
