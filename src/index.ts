@@ -9,8 +9,8 @@ export function Wildcard(): VNode {
         key: undefined,
         children: [],
         data: {
-            isWildcard: true
-        }
+            isWildcard: true,
+        },
     };
 }
 
@@ -43,22 +43,23 @@ export function assertLooksLike(
                     .createTwoFilesPatch('', '', eString, aString, '', '')
                     .split('\n')
                     .slice(5)
-                    .filter(s => s.indexOf('No newline at end of file') === -1)
                     .filter(
-                        s =>
+                        (s) => s.indexOf('No newline at end of file') === -1
+                    )
+                    .filter(
+                        (s) =>
                             !(s.startsWith('-') && s.indexOf('WILDCARD') !== -1)
                     )
-                    .map(
-                        s =>
-                            !(s.startsWith('+') || s.startsWith('-'))
-                                ? '         ' + s
-                                : s
+                    .map((s) =>
+                        !(s.startsWith('+') || s.startsWith('-'))
+                            ? '         ' + s
+                            : s
                     )
-                    .map(
-                        s => (s.startsWith('-') ? 'expected: ' + s.slice(1) : s)
+                    .map((s) =>
+                        s.startsWith('-') ? 'expected: ' + s.slice(1) : s
                     )
-                    .map(
-                        s => (s.startsWith('+') ? 'actual:   ' + s.slice(1) : s)
+                    .map((s) =>
+                        s.startsWith('+') ? 'actual:   ' + s.slice(1) : s
                     )
                     .join('\n') +
                 (longError
@@ -123,7 +124,7 @@ export function assertLooksLike(
             Array.isArray(expected.children)
         ) {
             if (
-                expected.children.filter(s => !isWildcard(s)).length >
+                expected.children.filter((s) => !isWildcard(s)).length >
                 actual.children.length
             ) {
                 throw new Error(e6(actual, expected));
@@ -136,10 +137,10 @@ export function assertLooksLike(
                                 ? 2
                                 : 0
                             : a === 2
-                                ? 2
-                                : isWildcard(c)
-                                    ? 1
-                                    : 0,
+                            ? 2
+                            : isWildcard(c)
+                            ? 1
+                            : 0,
                     0
                 ) === 2
             ) {
@@ -192,17 +193,16 @@ function removeGrandchildren(vnode: VNode) {
         ...vnode,
         children: vnode.children
             ? vnode.children
-                  .map(
-                      c =>
-                          typeof c === 'object'
-                              ? {
-                                    ...c,
-                                    children: '...'
-                                }
-                              : c
+                  .map((c) =>
+                      typeof c === 'object'
+                          ? {
+                                ...c,
+                                children: '...',
+                            }
+                          : c
                   )
-                  .map(c => (isWildcard(c) ? 'WILDCARD' : c))
-            : []
+                  .map((c) => (isWildcard(c) ? 'WILDCARD' : c))
+            : [],
     };
 }
 
@@ -248,7 +248,7 @@ function replicateWildcards<T>(actual: T[], expected: T[]): T[][] {
     const k = actual.length - (expected.length - n);
 
     if (k === 0) {
-        return [expected.filter(e => !isWildcard(e))];
+        return [expected.filter((e) => !isWildcard(e))];
     }
 
     const split = splitOn<T>(expected, isWildcard);

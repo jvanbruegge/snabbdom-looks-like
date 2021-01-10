@@ -1,8 +1,7 @@
 import * as assert from 'assert';
 import { h } from 'snabbdom/h';
-import { VNode } from 'snabbdom/vnode';
 import { assertLooksLike, looksLike, Wildcard } from '../src/index';
-import Snabbdom from 'snabbdom-pragma';
+import * as Snabbdom from 'snabbdom-pragma';
 
 describe('structure', () => {
     it('should compare string nodes', () => {
@@ -30,19 +29,19 @@ describe('structure', () => {
     it('should compare nested nodes', () => {
         const vnode1 = h('div', {}, [
             h('span', {}, 'Hello'),
-            h('form', {}, [h('button.submit', {}, 'Submit')])
+            h('form', {}, [h('button.submit', {}, 'Submit')]),
         ]);
         const vnode2 = h('div', {}, [
             h('span', {}, 'Hello'),
-            h('form', {}, [h('button.submit', {}, 'Submit')])
+            h('form', {}, [h('button.submit', {}, 'Submit')]),
         ]);
         const vnode3 = h('div', {}, [
             h('span', {}, 'Hello'),
-            h('form', {}, [h('button.submit', {}, 'Sumit')])
+            h('form', {}, [h('button.submit', {}, 'Sumit')]),
         ]);
         const vnode4 = h('div', {}, [
             h('span', {}, 'Hello'),
-            h('form.test', {}, [h('button.submit', {}, 'Sumit')])
+            h('form.test', {}, [h('button.submit', {}, 'Sumit')]),
         ]);
 
         assertLooksLike(vnode1, vnode2);
@@ -57,23 +56,23 @@ describe('structure', () => {
         const vnode1 = h('div', {}, [
             h('span', {}, 'Hello'),
             h('span', {}, 'Hello2'),
-            h('span', {}, 'Hello3')
+            h('span', {}, 'Hello3'),
         ]);
         const vnode2 = h('div', {}, [
             Wildcard(),
             h('span', {}, 'Hello2'),
-            h('span', {}, 'Hello3')
+            h('span', {}, 'Hello3'),
         ]);
         const vnode3 = h('div', {}, [
             Wildcard(),
             h('span', {}, 'Hello2'),
-            Wildcard()
+            Wildcard(),
         ]);
         const vnode4 = h('div', {}, [Wildcard(), h('span', {}, 'Hello3')]);
         const vnode5 = h('div', {}, [
             Wildcard(),
             h('span', {}, 'Hello1'),
-            h('span', {}, 'Hello3')
+            h('span', {}, 'Hello3'),
         ]);
 
         assertLooksLike(vnode1, vnode2);
@@ -92,9 +91,9 @@ describe('structure', () => {
         const vnode1 = h('div', {}, [
             h('span', {}, 'Hello'),
             h('span', {}, 'Hello2'),
-            h('span', {}, 'Hello3')
+            h('span', {}, 'Hello3'),
         ]);
-        const vnode2 = (
+        const vnode2: any = (
             <div>
                 <span>Hello</span>
                 <span>Hello2</span>
@@ -104,16 +103,16 @@ describe('structure', () => {
         const vnode3 = h('div', {}, [
             Wildcard(),
             h('span', {}, 'Hello2'),
-            h('span', {}, 'Hello3')
+            h('span', {}, 'Hello3'),
         ]);
-        const vnode4 = (
+        const vnode4: any = (
             <div>
                 <Wildcard />
                 <span>Hello2</span>
                 <Wildcard />
             </div>
         );
-        const vnode5 = (
+        const vnode5: any = (
             <div>
                 <Wildcard />
                 <span>Hello3</span>
@@ -135,7 +134,7 @@ describe('structure', () => {
 
 describe('attributes', () => {
     it('should compare simple props', () => {
-        const expected = (
+        const expected: any = (
             <div>
                 <Wildcard />
                 <a attrs-href="/foo">Some link text</a>
@@ -145,12 +144,12 @@ describe('attributes', () => {
 
         const actual = h('div', {}, [
             h('a', { attrs: { href: '/foo' } }, 'Some link text'),
-            h('div', { props: { className: 'red' } })
+            h('div', { props: { className: 'red' } }),
         ]);
 
         const wrong = h('div', {}, [
             h('a', { props: { href: '/foo' } }, 'Some link text'),
-            h('div', { props: { className: 'red' } })
+            h('div', { props: { className: 'red' } }),
         ]);
 
         assertLooksLike(actual, expected);
