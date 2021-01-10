@@ -1,5 +1,7 @@
 # snabbdom-looks-like
 
+![Build](https://github.com/jvanbruegge/snabbdom-looks-like/workflows/Build/badge.svg)
+
 Makes it easy to assert if to virtual DOM trees look similar
 
 ## Usage
