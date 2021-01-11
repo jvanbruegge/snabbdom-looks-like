@@ -87,6 +87,36 @@ describe('structure', () => {
         assert(!looksLike(vnode2, vnode1));
     });
 
+    it('should match replicated wildcards', () => {
+        const actual = h('div', [
+            h('div', {}, 'A_1'),
+            h('div', {}, 'A_2'),
+            h('div', {}, 'A_3'),
+            h('div', {}, 'A_4')
+        ]);
+
+        const wrong1 = h('div', [Wildcard(), h('div', {}, 'B_2')]);
+        const wrong2 = h('div', [h('div', {}, 'B_2')]);
+
+        const expected1 = h('div', [
+            Wildcard(),
+            h('div', {}, 'A_3'),
+            h('div', {}, 'A_4')
+        ]);
+        const expected2 = h('div', [Wildcard(), h('div', {}, 'A_4')]);
+        const expected3 = h('div', [
+            Wildcard(),
+            h('div', {}, 'A_2'),
+            Wildcard()
+        ]);
+
+        assert.throws(() => assertLooksLike(actual, wrong1));
+        assert.throws(() => assertLooksLike(actual, wrong2));
+        assertLooksLike(actual, expected1);
+        assertLooksLike(actual, expected2);
+        assertLooksLike(actual, expected3);
+    });
+
     it('should match Wildcards with JSX', () => {
         const vnode1 = h('div', {}, [
             h('span', {}, 'Hello'),

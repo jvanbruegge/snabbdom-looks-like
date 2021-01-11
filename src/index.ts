@@ -247,7 +247,7 @@ function replicateWildcards<T>(actual: T[], expected: T[]): T[][] {
     const n = expected.filter(isWildcard).length;
     const k = actual.length - (expected.length - n);
 
-    if (k === 0) {
+    if (k === 0 || n === 0) {
         return [expected.filter((e) => !isWildcard(e))];
     }
 
