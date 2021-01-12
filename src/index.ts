@@ -159,7 +159,7 @@ export function assertLooksLike(
 
                 if (tries[i].length !== actual.children.length) {
                     throw new Error(
-                        e9(tries[i].length, actual.children.length)
+                        e9(actual.children, tries[i])
                     );
                 }
 
