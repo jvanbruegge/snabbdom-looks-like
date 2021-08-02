@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { h } from 'snabbdom/h';
+import { h } from 'snabbdom';
 import { assertLooksLike, looksLike, Wildcard } from '../src/index';
 import * as Snabbdom from 'snabbdom-pragma';
 
